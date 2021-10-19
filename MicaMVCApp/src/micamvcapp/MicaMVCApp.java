@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package micamvcapp;
+import micamvcapp.Models.BandModel;
+import micamvcapp.Models.SongModel;
 
 /**
  *
@@ -14,8 +16,14 @@ public class MicaMVCApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        System.out.println("Hello!");
+        
+        BandModel theBeatles = new BandModel();
+        theBeatles.setName("The Beatles\n");
+        theBeatles.setInfo("Underground artist you probably haven't heard of");
+        
+        System.out.print(theBeatles.getName());
+        System.out.println(theBeatles.getInfo());
+        
     }
     
 }

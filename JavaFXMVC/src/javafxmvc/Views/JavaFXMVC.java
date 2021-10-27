@@ -62,14 +62,17 @@ public class JavaFXMVC extends Application {
             for (Object o : selectedItem){
                 //System.out.println("o = " + o + " (" + o.getClass() + ")");
                 //change text in text area to BandModel information
+                System.out.println("searching for " + bandList.getSelectionModel().getSelectedItem().toString());
                 System.out.println(bandControl.searchBandList(bandList.getSelectionModel().getSelectedItem().toString()).getName());
-               // text.setText(bandControl.searchBandList(bandList.getSelectionModel().getSelectedItem().toString()).getInfo());
+                text.setText(bandControl.searchBandList(bandList.getSelectionModel().getSelectedItem().toString()).getInfo());
             }
         });
                 
         //create vertical layout box with button and list
         VBox vbox = new VBox(bandList, readButton, text);
         vbox.setSpacing(5);
+        
+        //HBox sceneHbox = new HBox(vbox, );
         
         //set scene and scene title
         Scene scene = new Scene(vbox, 500, 500);

@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package javafxmvc.Models;
+import java.util.ArrayList;
+import java.util.List;
 import javafxmvc.Models.SongModel;
 import javafxmvc.Models.PersonModel;
 /**
@@ -14,10 +16,8 @@ public class BandModel_1 {
     
     public String artistName;
     public String artistInfo;
-    public int yearStarted = 0;
-    public int yearsInProgress; 
-    public SongModel[] songList;
-    public PersonModel[] bandMembers;
+    public SongModel[] songLibrary;
+    List<PersonModel> bandMembers = new ArrayList();
     
     //ctor 
     public BandModel_1(){
@@ -35,8 +35,12 @@ public class BandModel_1 {
         return artistInfo;
     }
     
-    public int getYear(){
-        return yearStarted;
+    public List<PersonModel> getMembers(){
+        return bandMembers;
+    }
+    
+    public SongModel[] getSongLibrary(){
+        return songLibrary;
     }
     
     //setters
@@ -48,16 +52,12 @@ public class BandModel_1 {
         artistInfo = info;
     }
     
-    public void setYear(int year){
-        yearStarted = year;
-    } 
-    
-    public void getYearsInProg(int years){
-        yearsInProgress = years;
+    public void setSongLibrary(SongModel[] songList){
+        songLibrary = songList;
     }
     
-    public int addEndYear(){
-        return yearStarted + yearsInProgress;
+    public void setBandMembers(List<PersonModel> members){
+        bandMembers = members;
     }
     
 }

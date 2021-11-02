@@ -13,10 +13,16 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 /**
@@ -30,52 +36,90 @@ public class JavaFXMVC extends Application {
         //vars
         BandController bandControl = new BandController();
         
+        //define font types for labels
+        Font font = Font.font("Verdana", FontWeight.BOLD, FontPosture.ITALIC, 16);
         
-        //create ListView for different bands the user can view
+        
+        //create ListViews for bands and songs
         ListView bandList = new ListView();
+        ListView songList = new ListView();
         
-        //add default items to ListView
+        //add default items to bandList
         bandList.getItems().add("Arctic Monkeys");
         bandList.getItems().add("The Beatles");
         bandList.getItems().add("Clairo");
         
         //set default objects in arrayList
         bandControl.setEntries();
+
+        // ----------------------------------- TEXT AREAS -----------------------------------
         
-        //create horizontal box layout
-        HBox hbox = new HBox(bandList);
-        
-        //create text area for information to pop up
+        //create text area for band information
         TextArea text = new TextArea();
         text.setPrefRowCount(10);
         text.setPrefColumnCount(20);
         text.setWrapText(true);
-        text.setText("Band-Pedia");
-    
+        text.setText("Band Information");
+        
+        //create text area for song information
+        TextArea songText = new TextArea();
+        text.setPrefRowCount(10);
+        text.setPrefColumnCount(20);
+        text.setWrapText(true);
+        text.setText("Song Information");
+        
+        
+        // -------------------------------- BUTTONS ------------------------------------
         
         //create button for viewing information about the band
-        Button readButton = new Button("Show Info");
+        Button infoButton = new Button("Show Summary");
         
-        //on event, get the item that is being pressed
-        readButton.setOnAction(event -> {
+        //on event, return the information of the bandItem the user has selected
+        infoButton.setOnAction(event -> {
             ObservableList selectedItem = bandList.getSelectionModel().getSelectedIndices();
             for (Object o : selectedItem){
-                //System.out.println("o = " + o + " (" + o.getClass() + ")");
                 //change text in text area to BandModel information
                 System.out.println("searching for " + bandList.getSelectionModel().getSelectedItem().toString());
                 System.out.println(bandControl.searchBandList(bandList.getSelectionModel().getSelectedItem().toString()).getName());
                 text.setText(bandControl.searchBandList(bandList.getSelectionModel().getSelectedItem().toString()).getInfo());
             }
         });
+        
+        //create button to show band members
+        Button showMembersButton = new Button("Show Members");
+        
+        //on event, return the members of the bandItem the user has selected
+//        infoButton.setOnAction(event -> {
+//            ObservableList selectedItem = bandList.getSelectionModel().getSelectedIndices();
+//            for (Object o : selectedItem){
+//                //change text in text area to BandModel information
+//                System.out.println("searching for " + bandList.getSelectionModel().getSelectedItem().toString());
+//                System.out.println(bandControl.searchBandList(bandList.getSelectionModel().getSelectedItem().toString()).getName());
+//                text.setText(bandControl.returnBandMemberInfo(bandList.getSelectionModel().getSelectedItem().toString()));
+//            }
+//        });
+        
+        HBox buttonHbox = new HBox(infoButton, showMembersButton);
+        buttonHbox.setSpacing(5);
                 
+        //create label above first vbox
+        Label bandsLabel = new Label("  Artist List");
+        bandsLabel.setFont(font);
+        Label bandInfoLabel = new Label("  Artist Information");
+        bandInfoLabel.setFont(font);
+        
         //create vertical layout box with button and list
-        VBox vbox = new VBox(bandList, readButton, text);
+        VBox vbox = new VBox(bandsLabel, bandList, bandInfoLabel, buttonHbox, text);
         vbox.setSpacing(5);
         
-        //HBox sceneHbox = new HBox(vbox, );
+        //create text area for right side of UI
+        TextArea newText = new TextArea();
+        newText.setWrapText(true);
+        
+        HBox sceneHbox = new HBox(vbox, newText);
         
         //set scene and scene title
-        Scene scene = new Scene(vbox, 500, 500);
+        Scene scene = new Scene(sceneHbox, 900, 600, Color.AQUAMARINE);
         primaryStage.setTitle("Band-Pedia");
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -13,8 +13,13 @@ public class PersonModel {
     
     public String personName;
     public String instrument;
-    public int personAge;
     
+    public PersonModel(String name, String instrument){
+        this.personName = name;
+        this.instrument = instrument;
+    }
+
+
     //getters
      public String getName(){
         return personName;
@@ -24,9 +29,6 @@ public class PersonModel {
          return instrument;
      }
      
-     public int getAge(){
-         return personAge;
-     }
     
     //setters
        public void setName(String name){
@@ -37,9 +39,6 @@ public class PersonModel {
         instrument = inst;
     }
     
-    public void setAge(int age){
-        personAge = age;
-    }
    
     
     

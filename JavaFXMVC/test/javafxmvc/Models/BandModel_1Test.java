@@ -54,21 +54,6 @@ public class BandModel_1Test {
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of getYear method, of class BandModel_1.
-     */
-    @Test
-    public void testGetYear() {
-        System.out.println("getYear");
-        BandModel_1 instance = new BandModel_1();
-        int expResult = 0;
-        int result = instance.getYear();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
     /**
      * Test of setName method, of class BandModel_1.
      */
@@ -95,44 +80,6 @@ public class BandModel_1Test {
         //fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of setYear method, of class BandModel_1.
-     */
-    @Test
-    public void testSetYear() {
-        System.out.println("setYear");
-        int year = 0;
-        BandModel_1 instance = new BandModel_1();
-        instance.setYear(year);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
 
-    /**
-     * Test of getYearsInProg method, of class BandModel_1.
-     */
-    @Test
-    public void testGetYearsInProg() {
-        System.out.println("getYearsInProg");
-        int years = 0;
-        BandModel_1 instance = new BandModel_1();
-        instance.getYearsInProg(years);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of addEndYear method, of class BandModel_1.
-     */
-    @Test
-    public void testAddEndYear() {
-        System.out.println("addEndYear");
-        BandModel_1 instance = new BandModel_1();
-        int expResult = 0;
-        int result = instance.addEndYear();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
     
 }

@@ -112,12 +112,5 @@ public class BandController {
 //        }
 //        
 //        return returnString;
-//    }
-    
-    
-    
-    //add entry function for user to input string of band/ artists name and add them to the page
-
-    
-    
+//   }
 }

@@ -5,6 +5,8 @@
 package javafxmvc.Views;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,6 +20,9 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafxmvc.Controllers.BandController;
+import javafxmvc.Controllers.SceneController;
+import javafxmvc.Models.BandModel_1;
+import javafxmvc.Views.ArtistPageSceneView;
 
 /**
  *
@@ -26,17 +31,20 @@ import javafxmvc.Controllers.BandController;
 public class MainSceneView {
 
     public void startScene(Stage primaryStage) {
-        //vars
+        
         BandController bandControl = new BandController();
+        SceneController sceneControl = new SceneController();
+        ArtistPageSceneView artistPageView = new ArtistPageSceneView();
+        
+        //BandModel_1 bandSelected2 = new BandModel_1();
+
         
         //define font types for labels
         Font font = Font.font("Verdana", FontWeight.BOLD, FontPosture.ITALIC, 16);
         
-        //create variable to track band currently selected
-        
         //create ListViews for bands and songs
         ListView bandList = new ListView();
-        ListView songList = new ListView();
+        
         
         //add default items to bandList
         bandList.getItems().add("Arctic Monkeys");
@@ -68,15 +76,18 @@ public class MainSceneView {
         //create button for viewing information about the band
         Button infoButton = new Button("Show Summary");
         
-        //on event, return the information of the bandItem the user has selected
-        infoButton.setOnAction(event -> {
-            ObservableList selectedItem = bandList.getSelectionModel().getSelectedIndices();
-            for (Object o : selectedItem){
-                //change text in text area to BandModel information
-                System.out.println("searching for " + bandList.getSelectionModel().getSelectedItem().toString());
-                System.out.println(bandControl.searchBandList(bandList.getSelectionModel().getSelectedItem().toString()).getName());
-                text.setText(bandControl.searchBandList(bandList.getSelectionModel().getSelectedItem().toString()).getInfo());
-                //bandSelected = bandControl.searchBandList(bandList.getSelectionModel().getSelectedItem().toString()).getName();
+        //on event, return the information of the bandItem the user has selected      
+        infoButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ObservableList selectedItem = bandList.getSelectionModel().getSelectedIndices();
+                for (Object o : selectedItem){
+                    //change text in text area to BandModel information
+                    System.out.println("searching for " + bandList.getSelectionModel().getSelectedItem().toString());
+                    System.out.println(bandControl.searchBandList(bandList.getSelectionModel().getSelectedItem().toString()).getName());
+                    text.setText(bandControl.searchBandList(bandList.getSelectionModel().getSelectedItem().toString()).getInfo());
+                    //bandSelected2 = bandControl.searchBandList("");
+                }
             }
         });
         
@@ -94,6 +105,16 @@ public class MainSceneView {
 //            }
 //        });
 
+        //create button to siwtch to artist scene
+        Button viewArtistPageButton = new Button("View Artist Page");
+        
+        //on event, go to artistPage scene
+       
+        
+        
+        viewArtistPageButton.setOnAction(event -> {
+           artistPageView.startScene(primaryStage);
+        });
 
   
         
@@ -105,43 +126,23 @@ public class MainSceneView {
         bandsLabel.setFont(font);
         Label bandInfoLabel = new Label("  Artist Information");
         bandInfoLabel.setFont(font);
-        Label songlistLabel = new Label("  Songs by ");
-        bandInfoLabel.setFont(font);
+
         
         //create vertical layout box with button and list
-        VBox vbox = new VBox(bandsLabel, bandList, bandInfoLabel, buttonHbox, text);
+        VBox vbox = new VBox(bandsLabel, bandList);
         vbox.setSpacing(5);
+        VBox vbox2 = new VBox(bandInfoLabel,buttonHbox, text, viewArtistPageButton);
+        vbox2.setSpacing(5);
         
-        //create vbox for the songList
-        VBox songListVbox = new VBox(songlistLabel, songList);
+        HBox sceneHbox = new HBox(vbox, vbox2);
+        sceneHbox.setSpacing(5);
         
-        //create text area for right side of UI
-        TextArea newText = new TextArea();
-        newText.setWrapText(true);
-        
-        TextArea testTextArea = new TextArea();
-        testTextArea.setText("Trying to test");
-        
-        HBox newHBox = new HBox(testTextArea);
-        
-        //set scene and scene title
-        
-        Scene newScene = new Scene(newHBox, 900, 600);
-        
-        Button testButton = new Button("test button");
-         testButton.setOnAction(event -> {
-            primaryStage.setScene(newScene);
-            primaryStage.show();
-        });
-        
-         HBox sceneHbox = new HBox(vbox, songListVbox, newText, testButton);
-        
-        Scene scene = new Scene(sceneHbox, 900, 600, Color.AQUAMARINE);
+       
+        Scene scene = new Scene(sceneHbox, 600, 400);
+        sceneControl.changeScene(primaryStage, scene, "Band-Pedia");
         
         
-        primaryStage.setTitle("Band-Pedia");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+
     }
     
     

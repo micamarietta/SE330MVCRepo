@@ -6,7 +6,6 @@ package javafxmvc.Models;
 import java.util.ArrayList;
 import java.util.List;
 import javafxmvc.Models.SongModel;
-import javafxmvc.Models.PersonModel;
 /**
  *
  * @author rmari
@@ -16,8 +15,7 @@ public class BandModel_1 {
     
     public String artistName;
     public String artistInfo;
-    public SongModel[] songLibrary;
-    List<PersonModel> bandMembers = new ArrayList();
+    public List<SongModel> songList = new ArrayList();
     
     //ctor 
     public BandModel_1(){
@@ -35,12 +33,8 @@ public class BandModel_1 {
         return artistInfo;
     }
     
-    public List<PersonModel> getMembers(){
-        return bandMembers;
-    }
-    
-    public SongModel[] getSongLibrary(){
-        return songLibrary;
+    public List getSongList(){
+        return songList;
     }
     
     //setters
@@ -52,12 +46,9 @@ public class BandModel_1 {
         artistInfo = info;
     }
     
-    public void setSongLibrary(SongModel[] songList){
-        songLibrary = songList;
+    public void addToSongList(SongModel song){
+        songList.add(song);
     }
-    
-    public void setBandMembers(List<PersonModel> members){
-        bandMembers = members;
-    }
+
     
 }

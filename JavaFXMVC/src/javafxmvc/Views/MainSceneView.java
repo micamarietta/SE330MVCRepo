@@ -4,6 +4,8 @@
  */
 package javafxmvc.Views;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,15 +31,14 @@ import javafxmvc.Views.ArtistPageSceneView;
  * @author rmari
  */
 public class MainSceneView {
+    
+    BandModel_1 bandSelected = new BandModel_1();
 
     public void startScene(Stage primaryStage) {
         
         BandController bandControl = new BandController();
         SceneController sceneControl = new SceneController();
-        ArtistPageSceneView artistPageView = new ArtistPageSceneView();
-        
-        //BandModel_1 bandSelected2 = new BandModel_1();
-
+        ArtistPageSceneView artistPageView = new ArtistPageSceneView(this.bandSelected);
         
         //define font types for labels
         Font font = Font.font("Verdana", FontWeight.BOLD, FontPosture.ITALIC, 16);
@@ -63,62 +64,56 @@ public class MainSceneView {
         text.setWrapText(true);
         text.setText("Band Information");
         
-        //create text area for song information
-        TextArea songText = new TextArea();
-        text.setPrefRowCount(10);
-        text.setPrefColumnCount(20);
-        text.setWrapText(true);
-        text.setText("Song Information");
+
         
         
-        // -------------------------------- BUTTONS ------------------------------------
+        // -------------------------------- BUTTONS/ACTIONS ------------------------------------
+        
+        //create button to switch to artist scene
+        Button viewArtistPageButton = new Button("View Artist Page");
+        viewArtistPageButton.setDisable(true);
+        
+        //on event, go to artistPage scene
+        viewArtistPageButton.setOnAction(event -> {
+           artistPageView.startScene(primaryStage);
+        });
+        
+        
+        //tracking user selections in list
+        bandList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+           @Override
+        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            System.out.println("ListView selection changed from oldValue = " 
+                    + oldValue + " to newValue = " + newValue);
+            viewArtistPageButton.setDisable(false);
+            bandSelected = bandControl.searchBandList(newValue);
+            System.out.println("Band selected is: " + bandSelected.getName());
+        }
+    });  
         
         //create button for viewing information about the band
-        Button infoButton = new Button("Show Summary");
+        Button infoButton = new Button("Show Quick Summary");
         
         //on event, return the information of the bandItem the user has selected      
         infoButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 ObservableList selectedItem = bandList.getSelectionModel().getSelectedIndices();
+                
                 for (Object o : selectedItem){
                     //change text in text area to BandModel information
-                    System.out.println("searching for " + bandList.getSelectionModel().getSelectedItem().toString());
-                    System.out.println(bandControl.searchBandList(bandList.getSelectionModel().getSelectedItem().toString()).getName());
+                    //System.out.println("searching for " + bandList.getSelectionModel().getSelectedItem().toString());
+                    //System.out.println("Band has been set: " + bandControl.searchBandList(bandList.getSelectionModel().getSelectedItem().toString()).getName());
                     text.setText(bandControl.searchBandList(bandList.getSelectionModel().getSelectedItem().toString()).getInfo());
-                    //bandSelected2 = bandControl.searchBandList("");
                 }
             }
         });
-        
-        //create button to show band members
-        Button showMembersButton = new Button("Show Members");
-        
-        //on event, return the members of the bandItem the user has selected
-//        infoButton.setOnAction(event -> {
-//            ObservableList selectedItem = bandList.getSelectionModel().getSelectedIndices();
-//            for (Object o : selectedItem){
-//                //change text in text area to BandModel information
-//                System.out.println("searching for " + bandList.getSelectionModel().getSelectedItem().toString());
-//                System.out.println(bandControl.searchBandList(bandList.getSelectionModel().getSelectedItem().toString()).getName());
-//                text.setText(bandControl.returnBandMemberInfo(bandList.getSelectionModel().getSelectedItem().toString()));
-//            }
-//        });
 
-        //create button to siwtch to artist scene
-        Button viewArtistPageButton = new Button("View Artist Page");
-        
-        //on event, go to artistPage scene
-       
-        
-        
-        viewArtistPageButton.setOnAction(event -> {
-           artistPageView.startScene(primaryStage);
-        });
+
 
   
         
-        HBox buttonHbox = new HBox(infoButton, showMembersButton);
+        HBox buttonHbox = new HBox(infoButton);
         buttonHbox.setSpacing(5);
                 
         //create label above first vbox
@@ -141,9 +136,5 @@ public class MainSceneView {
         Scene scene = new Scene(sceneHbox, 600, 400);
         sceneControl.changeScene(primaryStage, scene, "Band-Pedia");
         
-        
-
     }
-    
-    
 }

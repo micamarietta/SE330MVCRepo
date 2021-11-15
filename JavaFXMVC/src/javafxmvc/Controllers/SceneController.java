@@ -20,5 +20,4 @@ public class SceneController {
         stage.show();
     }
     
-    
 }

@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package javafxmvc.Views;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,36 +30,53 @@ import javafxmvc.Views.MainSceneView;
  */
 public class ArtistPageSceneView {
     
-    BandModel_1 bandSelected;
+    public BandModel_1 bandSelected;
+    public Label songlistLabel;
     
     //ctor
-    ArtistPageSceneView(BandModel_1 band){
-        bandSelected = band;
-        System.out.println("Band is: " + band);
+    ArtistPageSceneView(){
     }
     
-    public void startScene(Stage primaryStage){
+    public void startScene(Stage primaryStage, BandModel_1 band){
     //creates the scene for the artist page
     //displays band info
     //displays song list
     //displays song information
+    
+        BandController bandControl = new BandController();
+        bandSelected = band;
         SceneController sceneControl = new SceneController();
         MainSceneView mainScene = new MainSceneView();
         
-        ListView songList = new ListView(); 
-        System.out.println("Band selected is:" + bandSelected.getName());
+        ListView bandSelectedSetList = new ListView(); 
+        //System.out.println("Band selected is:" + bandSelected.getName());
         
         //labels
-        Label songlistLabel = new Label(bandSelected.getName());  
         Label songTextLabel = new Label("Song information");
+        songlistLabel = new Label("Songs by " + bandSelected.getName());
         
         TextArea songText = new TextArea();
         songText.setPrefRowCount(15);
         songText.setPrefColumnCount(20);
         songText.setWrapText(true);
         
-        //populate list view
-        songList.getItems().add("Song 1 asdfsdf");
+        //populate list view with all songs for the band the user has selected
+        for(int i = 0; i < bandSelected.songList.getSetListSize(); i++){
+            //add name of each song to the array
+            bandSelectedSetList.getItems().add(bandSelected.songList.setList.get(i).getName());
+        }
+        
+        
+        //when tracking user selections in  song setlist, display the lyrics in the text box
+        bandSelectedSetList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+           @Override
+        public void changed(javafx.beans.value.ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            //set text box to the right to be the lyrics of the selected song
+            songText.setText(bandControl.searchSetList(bandSelected, newValue).getSongLyrics());
+        }
+    });  
+        
+        /////////////////////////////////// BUTTONS ///////////////////////////////////////////
         
         //create back button
         Button backButton = new Button("Back");
@@ -72,7 +90,7 @@ public class ArtistPageSceneView {
         });
 
         //create vbox for the songList
-        VBox songListVbox = new VBox(songlistLabel, songList);
+        VBox songListVbox = new VBox(songlistLabel, bandSelectedSetList);
         VBox songTextVbox = new VBox(songTextLabel, songText, backButton);
         songTextVbox.setSpacing(5);
         HBox hbox = new HBox(songListVbox, songTextVbox);

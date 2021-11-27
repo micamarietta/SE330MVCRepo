@@ -6,6 +6,7 @@ package javafxmvc.Models;
 import java.util.ArrayList;
 import java.util.List;
 import javafxmvc.Models.SongModel;
+import javafxmvc.Models.SetListModel;
 /**
  *
  * @author rmari
@@ -15,12 +16,17 @@ public class BandModel_1 {
     
     public String artistName;
     public String artistInfo;
-    public List<SongModel> songList = new ArrayList();
+    public SetListModel songList = new SetListModel();
     
     //ctor 
     public BandModel_1(){
         artistName = "Unknown";
         artistInfo = "N/A";
+    }
+    
+    //overloaded ctor
+    public BandModel_1(String name){
+        artistName = name;
     }
     
     //getters
@@ -34,7 +40,7 @@ public class BandModel_1 {
     }
     
     public List getSongList(){
-        return songList;
+        return songList.getSetList();
     }
     
     //setters
@@ -46,9 +52,7 @@ public class BandModel_1 {
         artistInfo = info;
     }
     
-    public void addToSongList(SongModel song){
-        songList.add(song);
+    public void setSongList(SetListModel list){
+        songList = list;
     }
-
-    
 }

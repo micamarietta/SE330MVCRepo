@@ -27,7 +27,7 @@ public class BandModel_1Test {
     }
 
     /**
-     * Test of getName method, of class BandModel_1.
+     * Test of getName method
      */
     @Test
     public void testGetName() {
@@ -37,12 +37,10 @@ public class BandModel_1Test {
         System.out.println(expResult);
         String result = instance.getName();
         assertTrue(expResult.equals(result));
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getInfo method, of class BandModel_1.
+     * Test of getInfo method
      */
     @Test
     public void testGetInfo() {
@@ -51,11 +49,9 @@ public class BandModel_1Test {
         String expResult = "N/A";
         String result = instance.getInfo();
         assertTrue(expResult.equals(result)); 
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
     /**
-     * Test of setName method, of class BandModel_1.
+     * Test of setName method
      */
     @Test
     public void testSetName() {
@@ -63,12 +59,10 @@ public class BandModel_1Test {
         String name = "";
         BandModel_1 instance = new BandModel_1();
         instance.setName(name);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
     /**
-     * Test of setInfo method, of class BandModel_1.
+     * Test of setInfo method
      */
     @Test
     public void testSetInfo() {
@@ -76,9 +70,17 @@ public class BandModel_1Test {
         String info = "";
         BandModel_1 instance = new BandModel_1();
         instance.setInfo(info);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
+    
+    /**
+     * Test of add to song list method
+     */
+    @Test
+    public void testAddToSongList(){
+        System.out.println("addToSongList");
+        
+    }
+        
 
 
     

@@ -32,13 +32,13 @@ import javafxmvc.Views.ArtistPageSceneView;
  */
 public class MainSceneView {
     
-    BandModel_1 bandSelected = new BandModel_1();
+    public static BandModel_1 bandSelected = new BandModel_1();
 
     public void startScene(Stage primaryStage) {
         
         BandController bandControl = new BandController();
         SceneController sceneControl = new SceneController();
-        ArtistPageSceneView artistPageView = new ArtistPageSceneView(this.bandSelected);
+        ArtistPageSceneView artistPageView = new ArtistPageSceneView();
         
         //define font types for labels
         Font font = Font.font("Verdana", FontWeight.BOLD, FontPosture.ITALIC, 16);
@@ -62,10 +62,7 @@ public class MainSceneView {
         text.setPrefRowCount(10);
         text.setPrefColumnCount(20);
         text.setWrapText(true);
-        text.setText("Band Information");
-        
-
-        
+        text.setText("Band Information");        
         
         // -------------------------------- BUTTONS/ACTIONS ------------------------------------
         
@@ -75,9 +72,8 @@ public class MainSceneView {
         
         //on event, go to artistPage scene
         viewArtistPageButton.setOnAction(event -> {
-           artistPageView.startScene(primaryStage);
+           artistPageView.startScene(primaryStage, bandSelected);
         });
-        
         
         //tracking user selections in list
         bandList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
@@ -109,10 +105,6 @@ public class MainSceneView {
             }
         });
 
-
-
-  
-        
         HBox buttonHbox = new HBox(infoButton);
         buttonHbox.setSpacing(5);
                 
@@ -121,7 +113,6 @@ public class MainSceneView {
         bandsLabel.setFont(font);
         Label bandInfoLabel = new Label("  Artist Information");
         bandInfoLabel.setFont(font);
-
         
         //create vertical layout box with button and list
         VBox vbox = new VBox(bandsLabel, bandList);

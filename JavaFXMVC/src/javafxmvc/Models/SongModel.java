@@ -10,7 +10,6 @@ package javafxmvc.Models;
  */
 public class SongModel {
     public String songName;
-    public String trackLink;
     public String songLyrics;
     public int numberOfListens;
     
@@ -19,9 +18,8 @@ public class SongModel {
     }
     
     //overloaded ctor
-    public SongModel(String name, String link, String lyrics){
+    public SongModel(String name, String lyrics){
         songName = name;
-        trackLink = link;
         songLyrics = lyrics;
         numberOfListens = 0;
     }
@@ -29,10 +27,6 @@ public class SongModel {
     //getters
     public String getName(){
         return songName;
-    }
-    
-    public String getLink(){
-        return trackLink;
     }
 
     public int getListens(){
@@ -46,10 +40,6 @@ public class SongModel {
     //setters
     public void setName(String name){
         songName = name;
-    }
-    
-    public void setTrackLink(String link){
-        trackLink = link;
     }
     
     public void setListens(int listens){

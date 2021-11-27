@@ -57,7 +57,7 @@ public class ArtistPageSceneView {
         mediaCont.initFiles();
         
         //labels
-        Label songTextLabel = new Label("Song information");
+        Label songTextLabel = new Label("Song lyrics:");
         songlistLabel = new Label("Songs by " + bandSelected.getName());
         
         TextArea songText = new TextArea();
@@ -66,7 +66,7 @@ public class ArtistPageSceneView {
         songText.setWrapText(true);
         
         //populate list view with all songs for the band the user has selected
-        for(int i = 0; i < bandSelected.songList.getSetListSize(); i++){
+        for(int i = 0; i < bandSelected.songList.setList.size(); i++){
             //add name of each song to the array
             bandSelectedSetList.getItems().add(bandSelected.songList.setList.get(i).getName());
         }

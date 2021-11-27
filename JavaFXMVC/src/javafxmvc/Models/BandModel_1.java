@@ -16,12 +16,13 @@ public class BandModel_1 {
     
     public String artistName;
     public String artistInfo;
-    public SetListModel songList = new SetListModel();
+    public SetListModel songList;
     
     //ctor 
     public BandModel_1(){
         artistName = "Unknown";
         artistInfo = "N/A";
+        songList = new SetListModel();
     }
     
     //overloaded ctor

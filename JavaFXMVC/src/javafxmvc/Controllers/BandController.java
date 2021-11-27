@@ -40,7 +40,7 @@ public class BandController {
         bandList.add(band3);
         
         //create songs
-        SongModel band1Song1 = new SongModel("A Certain Romance", "https://www.youtube.com/watch?v=zMupng6KQeE",
+        SongModel band1Song1 = new SongModel("A Certain Romance",
             "Well, oh, they might wear classic Reeboks\n" +
             "Or knackered Converse\n" +
             "Or tracky bottoms tucked in socks\n" +
@@ -119,9 +119,9 @@ public class BandController {
         SongModel returnSong = new SongModel();
         
         System.out.println("Searching for " + songName);
-        
-        //loop through elements in list, if name matches, return BandModel object
-        for(int i = 0; i < band.songList.setListLength; i++){
+                //loop through elements in list, if name matches, return BandModel object
+
+        for(int i = 0; i < band.songList.setList.size(); i++){
             if(band.songList.setList.get(i).getName().equals(songName)){
                 System.out.println("On this band in the list: " + band.songList.setList.get(i).getName());
                 objectFound = true;

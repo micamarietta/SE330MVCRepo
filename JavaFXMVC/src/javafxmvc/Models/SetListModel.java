@@ -13,15 +13,10 @@ import javafxmvc.Models.SongModel;
  */
 public class SetListModel {
     public List<SongModel> setList = new ArrayList();
-    public int setListLength = setList.size();
     
     //getter
     public List<SongModel> getSetList(){
         return setList;
-    }
-    
-    public int getSetListSize(){
-        return setListLength;
     }
     
     //setters
@@ -32,7 +27,6 @@ public class SetListModel {
     //add songs to list
     public void addSongs(SongModel song){
         setList.add(song);
-        setListLength++;
     }
     
     

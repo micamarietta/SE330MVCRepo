@@ -23,6 +23,7 @@ import javafxmvc.Controllers.BandController;
 import javafxmvc.Controllers.SceneController;
 import javafxmvc.Models.BandModel_1;
 import javafxmvc.Views.MainSceneView;
+import javafxmvc.Controllers.MediaController;
 
 /**
  *
@@ -32,6 +33,7 @@ public class ArtistPageSceneView {
     
     public BandModel_1 bandSelected;
     public Label songlistLabel;
+    public MediaController mediaCont = new MediaController();
     
     //ctor
     ArtistPageSceneView(){
@@ -50,6 +52,9 @@ public class ArtistPageSceneView {
         
         ListView bandSelectedSetList = new ListView(); 
         //System.out.println("Band selected is:" + bandSelected.getName());
+        
+        //initialize media files
+        mediaCont.initFiles();
         
         //labels
         Label songTextLabel = new Label("Song information");
@@ -88,10 +93,22 @@ public class ArtistPageSceneView {
                mainScene.startScene(primaryStage);
             }
         });
+        
+        //create play button
+        Button playButton = new Button("Play Song");
+        
+         //on button click event, play the song selected by user
+        playButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+               mediaCont.playSong(0);
+            }
+        });
 
-        //create vbox for the songList
+        //create vboxes + hboxes for the songList
+        HBox buttonsHbox = new HBox(playButton, backButton);
         VBox songListVbox = new VBox(songlistLabel, bandSelectedSetList);
-        VBox songTextVbox = new VBox(songTextLabel, songText, backButton);
+        VBox songTextVbox = new VBox(songTextLabel, songText, buttonsHbox);
         songTextVbox.setSpacing(5);
         HBox hbox = new HBox(songListVbox, songTextVbox);
         hbox.setSpacing(10);

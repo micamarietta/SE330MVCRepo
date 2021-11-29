@@ -15,6 +15,13 @@ public class SceneController {
     //manages scenes in each view
     //method to change a scene
     public void changeScene(Stage stage, Scene scene, String title){
+        
+        //if parameters are null, return
+        if(stage == null || scene == null || title == null){
+            System.out.println("Parameter was null");
+            return;
+        }
+        
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();

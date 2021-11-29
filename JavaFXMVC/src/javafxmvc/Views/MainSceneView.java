@@ -4,11 +4,17 @@
  */
 package javafxmvc.Views;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,6 +22,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -51,6 +60,10 @@ public class MainSceneView {
         bandList.getItems().add("Arctic Monkeys");
         bandList.getItems().add("The Beatles");
         bandList.getItems().add("Clairo");
+        bandList.getItems().add("The Strokes");
+        bandList.getItems().add("Bruno Mars");
+        bandList.getItems().add("Cage the Elephant");
+        bandList.getItems().add("Paramore");
         
         //set default objects in arrayList
         bandControl.setEntries();
@@ -123,7 +136,6 @@ public class MainSceneView {
         HBox sceneHbox = new HBox(vbox, vbox2);
         sceneHbox.setSpacing(5);
         
-       
         Scene scene = new Scene(sceneHbox, 600, 400);
         sceneControl.changeScene(primaryStage, scene, "Band-Pedia");
         

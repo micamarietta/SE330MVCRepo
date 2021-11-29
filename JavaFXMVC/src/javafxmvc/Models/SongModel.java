@@ -4,6 +4,8 @@
  */
 package javafxmvc.Models;
 
+import javafx.scene.control.Hyperlink;
+
 /**
  *
  * @author rmari
@@ -11,6 +13,7 @@ package javafxmvc.Models;
 public class SongModel {
     public String songName;
     public String songLyrics;
+    public String trackLink;
     public int numberOfListens;
     
     //ctor
@@ -37,6 +40,10 @@ public class SongModel {
         return songLyrics;
     }
     
+    public String getSongTrack(){
+        return trackLink;
+    }
+    
     //setters
     public void setName(String name){
         songName = name;
@@ -48,5 +55,9 @@ public class SongModel {
     
     public void setSongLyrics(String lyrics){
         songLyrics = lyrics;
+    }
+    
+    public void setTrackLink(String link){
+        trackLink = link;
     }
 }

@@ -82,6 +82,7 @@ public class MainSceneView {
         //create button to switch to artist scene
         Button viewArtistPageButton = new Button("View Artist Page");
         viewArtistPageButton.setDisable(true);
+        viewArtistPageButton.setStyle("-fx-background-color: PALEGREEN;");
         
         //on event, go to artistPage scene
         viewArtistPageButton.setOnAction(event -> {
@@ -102,6 +103,7 @@ public class MainSceneView {
         
         //create button for viewing information about the band
         Button infoButton = new Button("Show Quick Summary");
+        infoButton.setStyle("-fx-background-color: LIGHTPINK;");
         
         //on event, return the information of the bandItem the user has selected      
         infoButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -135,6 +137,7 @@ public class MainSceneView {
         
         HBox sceneHbox = new HBox(vbox, vbox2);
         sceneHbox.setSpacing(5);
+        sceneHbox.setStyle("-fx-background-color: PAPAYAWHIP;"); 
         
         Scene scene = new Scene(sceneHbox, 600, 400);
         sceneControl.changeScene(primaryStage, scene, "Band-Pedia");

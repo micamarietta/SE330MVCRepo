@@ -63,16 +63,18 @@ public class ArtistPageSceneView {
         SceneController sceneControl = new SceneController();
         MainSceneView mainScene = new MainSceneView();
         
-        //create alert to display when user chooses to play song
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Song URL");
+        //define font types for labels
+        Font font = Font.font("Verdana", FontWeight.BOLD, FontPosture.ITALIC, 16);
         
         ListView bandSelectedSetList = new ListView(); 
         
         //labels
         Label songTextLabel = new Label("Song lyrics:");
+        songTextLabel.setFont(font);
         songlistLabel = new Label("Songs by " + bandSelected.getName());
+        songlistLabel.setFont(font);
         Label numberOfListensLabel = new Label("Number of Listens:");
+        numberOfListensLabel.setFont(font);
         
         
         TextArea songText = new TextArea();
@@ -95,10 +97,6 @@ public class ArtistPageSceneView {
             //set text box to the right to be the lyrics of the selected song
             songSelected = bandControl.searchSetList(bandSelected, newValue);
             songText.setText(bandControl.searchSetList(bandSelected, newValue).getSongLyrics()); 
-            
-            //set alert text dependent on user selection
-            alert.setHeaderText("Play " + songSelected.getName() + " here");
-            alert.setContentText(songSelected.getSongTrack());
         }
     });  
         
@@ -106,6 +104,7 @@ public class ArtistPageSceneView {
         
         //create back button
         Button backButton = new Button("Back");
+        backButton.setStyle("-fx-background-color: LIGHTPINK;");
         
         //on button click event, return to previous scene
         backButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -117,6 +116,7 @@ public class ArtistPageSceneView {
         
         //create play button
         Button playButton = new Button("Play Song");
+        playButton.setStyle("-fx-background-color: PALEGREEN;");
         
          //on play button click event, play the song selected by user
         playButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -138,6 +138,7 @@ public class ArtistPageSceneView {
 
         //create vboxes + hboxes for the songList
         HBox buttonsHbox = new HBox(playButton, backButton);
+        buttonsHbox.setSpacing(10);
         HBox labelsHBox = new HBox(songTextLabel, numberOfListensLabel);
         labelsHBox.setSpacing(40);
         VBox songListVbox = new VBox(songlistLabel, bandSelectedSetList);
@@ -147,10 +148,11 @@ public class ArtistPageSceneView {
         
         HBox hbox = new HBox(songListVbox, songTextVbox);
         hbox.setSpacing(10);
+        hbox.setStyle("-fx-background-color: PAPAYAWHIP;"); 
         
         
         //set scene
-        Scene artistPageScene = new Scene(hbox, 600, 400);
+        Scene artistPageScene = new Scene(hbox, 600, 400); 
         sceneControl.changeScene(primaryStage, artistPageScene, "Artist Page");
         
         
